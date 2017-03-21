@@ -1,0 +1,19 @@
+---
+
+  - name: add npaul user account
+    user: name=npaul uid=1001 comment="Nivedita Paul" createhome=yes shell=/bin/bash
+
+  - name: setup sudoers
+    lineinfile: |
+      dest=/etc/sudoers.d/90-cloud-init-users
+      line="npaul ALL=(ALL) NOPASSWD:ALL"
+
+  - name: Install packages
+    apt: pkg={{ item }} state=installed update_cache=yes
+    with_items: 
+      - git
+      - subversion
+      - tree
+      - mailutils
+      - fail2ban
+      - clamav

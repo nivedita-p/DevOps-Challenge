@@ -1,0 +1,15 @@
+---
+# group_vars/all.yml
+
+region: eu-central-1
+#zone: eu-central-1a # zone that the master AMI will be configured in
+keypair: np-keys-aws
+security_groups: ['default']
+instance_type: t2.micro
+default_ami: ami-2a3de945
+iam_profile: "noaccess"
+volumes:
+  - device_name: /dev/sda1
+    device_type: gp2
+    volume_size: 10
+    delete_on_termination: true

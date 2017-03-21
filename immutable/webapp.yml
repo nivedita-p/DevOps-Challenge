@@ -1,0 +1,21 @@
+---
+# Usage: ansible-playbook webapp.yml --extra-vars "server_name=<NAME>" -i /path/to/privatekey
+# this playbook deals with launching an aws instance and apply roles on it
+#  - please install awscli and configure your aws api access credentials in the ansible workstation
+#  - place your private key in ~/.ssh/id_rsa
+#  - the webapp file is available in ./files/
+
+  - hosts: localhost
+    connection: local
+    gather_facts: no
+    roles:
+      - role: launch
+        name: "{{ server_name }}"
+
+  - hosts: "{{ server_name }}"
+    become: yes
+    roles:
+      - base-setup
+      - oracle-java
+      - tomcat-ubuntu
+      - webapp-setup

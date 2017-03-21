@@ -1,0 +1,9 @@
+---
+
+  - name: copy over webapp file
+    copy:
+      src: files/DefiniensJobSearchApp.war
+      dest: /var/lib/tomcat8/webapps/
+
+  - name: restart tomcat service
+    service: name=tomcat8 state=restarted
